@@ -1,0 +1,21 @@
+.header-top {
+    display: flex;
+    flex-flow: row nowrap;
+
+    &__user {
+        margin-left: auto;
+    }
+
+    .user {
+        display: flex;
+        padding: 5px;
+
+        &__register {
+            margin: 5px;
+        }
+
+        &__signIn {
+            margin: 5px;
+        }
+    }
+}
