@@ -16,25 +16,47 @@ import {
     ExpandMore as ExpandMoreIcon,
 } from '@material-ui/icons';
 
+const EXPAND_STATUS = {
+    DATASET: 'dataset',
+    SOURCES: 'sources',
+    EXPORTS: 'exports',
+    SETTINGS: 'settings',
+    STATS: 'stats',
+};
+
 class GraphConfig extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            expanded: false,
+            expandStatus: {
+                dataset: false,
+                sources: false,
+                exports: false,
+                settings: false,
+                stats: false,
+            },
         };
     }
 
-    handleChange = (panel) => (event, isExpanded) => {
-        this.setState({ expanded: isExpanded ? panel : false });
+    togglePanel = (panel) => (event, isExpanded) => {
+        this.setState((prevState) => ({
+            expandStatus: {
+                ...prevState.expandStatus,
+                [`${panel}`]: isExpanded,
+            },
+        }));
     };
 
     render() {
-        console.log('xxx001 this: ', this);
-        const { expanded } = this.state;
+        const { expandStatus } = this.state;
         const graphs = ['graph1', 'graph2', 'graph3'];
+        // console.log("xxx003 ", expandStatus)
         return (
             <div>
-                <Accordion expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>
+                <Accordion
+                    expanded={expandStatus.dataset}
+                    onChange={this.togglePanel(EXPAND_STATUS.DATASET)}
+                >
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel1bh-content"
@@ -49,8 +71,8 @@ class GraphConfig extends Component {
                     </AccordionSummary>
                     <AccordionDetails style={{ flexDirection: 'column' }}>
                         <Accordion
-                            expanded={expanded === 'panel1'}
-                            onChange={this.handleChange('panel1')}
+                            expanded={expandStatus.sources}
+                            onChange={this.togglePanel(EXPAND_STATUS.SOURCES)}
                         >
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}
@@ -70,8 +92,8 @@ class GraphConfig extends Component {
                             </AccordionDetails>
                         </Accordion>
                         <Accordion
-                            expanded={expanded === 'panel1'}
-                            onChange={this.handleChange('panel1')}
+                            expanded={expandStatus.exports}
+                            onChange={this.togglePanel(EXPAND_STATUS.EXPORTS)}
                         >
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}
@@ -97,7 +119,10 @@ class GraphConfig extends Component {
                     </AccordionDetails>
                 </Accordion>
 
-                <Accordion expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>
+                <Accordion
+                    expanded={expandStatus.settings}
+                    onChange={this.togglePanel(EXPAND_STATUS.SETTINGS)}
+                >
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel1bh-content"
@@ -143,7 +168,10 @@ class GraphConfig extends Component {
                     </AccordionDetails>
                 </Accordion>
 
-                <Accordion expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>
+                <Accordion
+                    expanded={expandStatus.stats}
+                    onChange={this.togglePanel(EXPAND_STATUS.STATS)}
+                >
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel1bh-content"
