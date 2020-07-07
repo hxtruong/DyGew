@@ -7,22 +7,15 @@ import {
     Accordion,
     AccordionSummary,
     AccordionDetails,
-    Switch,
 } from '@material-ui/core';
 import {
-    Settings as SettingsIcon,
     BarChart as BarChartIcon,
     Storage as StorageIcon,
     ExpandMore as ExpandMoreIcon,
 } from '@material-ui/icons';
 
-const EXPAND_STATUS = {
-    DATASET: 'dataset',
-    SOURCES: 'sources',
-    EXPORTS: 'exports',
-    SETTINGS: 'settings',
-    STATS: 'stats',
-};
+import { EXPAND_STATUS } from '../../../../utils/ExpandStatus';
+import GraphSetting from '../../../../containers/graphSetting';
 
 class GraphConfig extends Component {
     constructor(props) {
@@ -39,6 +32,7 @@ class GraphConfig extends Component {
     }
 
     togglePanel = (panel) => (event, isExpanded) => {
+        // console.log("xxx 003 ", panel)
         this.setState((prevState) => ({
             expandStatus: {
                 ...prevState.expandStatus,
@@ -119,54 +113,10 @@ class GraphConfig extends Component {
                     </AccordionDetails>
                 </Accordion>
 
-                <Accordion
-                    expanded={expandStatus.settings}
-                    onChange={this.togglePanel(EXPAND_STATUS.SETTINGS)}
-                >
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel1bh-content"
-                        id="panel1bh-header"
-                    >
-                        <ListItem>
-                            <ListItemIcon>
-                                <SettingsIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Settings" />
-                        </ListItem>
-                    </AccordionSummary>
-                    <AccordionDetails style={{ flexDirection: 'column' }}>
-                        <List component="nav" aria-label="Settings">
-                            <ListItem>
-                                <ListItemText primary="Node labels" />
-                                <Switch
-                                    checked={true}
-                                    onChange={this.handleChange}
-                                    name="checkedB"
-                                    color="primary"
-                                />
-                            </ListItem>
-                            <ListItem>
-                                <ListItemText primary="Highlight neighbors" />
-                                <Switch
-                                    checked={true}
-                                    onChange={this.handleChange}
-                                    name="checkedB"
-                                    color="primary"
-                                />
-                            </ListItem>
-                            <ListItem>
-                                <ListItemText primary="Global stats view" />
-                                <Switch
-                                    checked={true}
-                                    onChange={this.handleChange}
-                                    name="checkedB"
-                                    color="primary"
-                                />
-                            </ListItem>
-                        </List>
-                    </AccordionDetails>
-                </Accordion>
+                <GraphSetting
+                    settingsStatus={expandStatus.settings}
+                    togglePanel={this.togglePanel}
+                />
 
                 <Accordion
                     expanded={expandStatus.stats}
