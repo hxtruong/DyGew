@@ -3,4 +3,12 @@
     background: snow;
     height: 100%;
     width: 100%;
+
+    &__toggleDrawerBtn {
+        position: absolute;
+        left: 0;
+        z-index: 1;
+        margin-left: 10px;
+        margin-top: 10px;
+    }
 }

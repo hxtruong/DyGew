@@ -20,6 +20,7 @@ class GraphSetting extends Component {
     // }
 
     render() {
+        //TODO: control state of nodeHighlight, globalStatsView
         const { settingsStatus, togglePanel, nodeLabelStatus, toggleNodeLabel } = this.props;
         // console.log("xxx003 nodeLabelStatus ", nodeLabelStatus)
         return (

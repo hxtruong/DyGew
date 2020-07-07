@@ -1,11 +1,18 @@
 import React from 'react';
-import { Grid, Paper, List, ListItem, ListItemText, ListItemIcon, Drawer } from '@material-ui/core';
+import {
+    Grid,
+    Paper,
+    List,
+    ListItem,
+    ListItemText,
+    ListItemIcon,
+    Drawer,
+    IconButton,
+} from '@material-ui/core';
 import {
     Link as LinkIcon,
     Group as GroupIcon,
-    Settings as SettingsIcon,
-    BarChart as BarChartIcon,
-    Storage as StorageIcon,
+    PermDataSetting as PermDataSettingIcon,
 } from '@material-ui/icons';
 
 import GraphConfig from './graphConfig';
@@ -18,68 +25,55 @@ export default function GraphVisualization(props) {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
         }
-
         setState(open);
     };
 
     return (
-        <Grid
-            className="gvis"
-            spacing={1}
-            container
-            alignItems="stretch"
-            direction="row"
-            justify="space-evenly"
-        >
-            <Grid item>
-                <Paper>
-                    <React.Fragment>
-                        <List component="nav" aria-label="Settings" onClick={toggleDrawer(true)}>
+        <div className="gvis">
+            <React.Fragment>
+                <IconButton
+                    color="primary"
+                    aria-label="Graph Configuration"
+                    className="gvis__toggleDrawerBtn"
+                    onClick={toggleDrawer(true)}
+                >
+                    <PermDataSettingIcon fontSize="large" />
+                </IconButton>
+                <Drawer anchor="left" open={state} onClose={toggleDrawer(false)}>
+                    <GraphConfig />
+                </Drawer>
+            </React.Fragment>
+            <Grid
+                spacing={1}
+                container
+                direction="row"
+                alignItems="stretch"
+                justify="space-between"
+            >
+                <Grid item xs>
+                    <Paper>
+                        <ForceGraph />
+                    </Paper>
+                </Grid>
+                <Grid item xs={2}>
+                    <Paper>
+                        <List component="nav" aria-label="Functions">
                             <ListItem button>
                                 <ListItemIcon>
-                                    <StorageIcon />
+                                    <LinkIcon />
                                 </ListItemIcon>
+                                <ListItemText primary="Link prediction" />
                             </ListItem>
                             <ListItem button>
                                 <ListItemIcon>
-                                    <SettingsIcon />
+                                    <GroupIcon />
                                 </ListItemIcon>
-                            </ListItem>
-                            <ListItem button>
-                                <ListItemIcon>
-                                    <BarChartIcon />
-                                </ListItemIcon>
+                                <ListItemText primary="Node clustering" />
                             </ListItem>
                         </List>
-                        <Drawer anchor="left" open={state} onClose={toggleDrawer(false)}>
-                            <GraphConfig />
-                        </Drawer>
-                    </React.Fragment>
-                </Paper>
+                    </Paper>
+                </Grid>
             </Grid>
-            <Grid item xs={9}>
-                <Paper>
-                    <ForceGraph />
-                </Paper>
-            </Grid>
-            <Grid item xs={2}>
-                <Paper>
-                    <List component="nav" aria-label="Functions">
-                        <ListItem button>
-                            <ListItemIcon>
-                                <LinkIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Link prediction" />
-                        </ListItem>
-                        <ListItem button>
-                            <ListItemIcon>
-                                <GroupIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Node clustering" />
-                        </ListItem>
-                    </List>
-                </Paper>
-            </Grid>
-        </Grid>
+        </div>
     );
 }
