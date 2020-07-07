@@ -17,6 +17,7 @@ import {
 
 import GraphConfig from './graphConfig';
 import ForceGraph from './forceGraph';
+import GlobalGraphStat from '../../../containers/GlobalGraphStat';
 
 export default function GraphVisualization(props) {
     const [state, setState] = React.useState(false);
@@ -28,6 +29,7 @@ export default function GraphVisualization(props) {
         setState(open);
     };
 
+    // TODO: make sure fit screen - not show scroll
     return (
         <div className="gvis">
             <>
@@ -43,6 +45,7 @@ export default function GraphVisualization(props) {
                     <GraphConfig />
                 </Drawer>
             </>
+            <GlobalGraphStat className="gvis__globalGraphStat" />
             <Grid
                 spacing={1}
                 container
