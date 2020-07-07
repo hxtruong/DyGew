@@ -1,4 +1,4 @@
-import { ADD_TODO, TOGGLE_TODO, SET_FILTER } from './actionTypes';
+import { ADD_TODO, TOGGLE_TODO, SET_FILTER, TOGGLE_NODE_LABEL } from './actionTypes';
 
 let nextTodoId = 0;
 
@@ -16,3 +16,7 @@ export const toggleTodo = (id) => ({
 });
 
 export const setFilter = (filter) => ({ type: SET_FILTER, payload: { filter } });
+
+export const toggleNodeLabel = (_) => ({
+    type: TOGGLE_NODE_LABEL,
+});

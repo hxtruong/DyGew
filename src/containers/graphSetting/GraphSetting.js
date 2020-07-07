@@ -10,16 +10,18 @@ import {
     Switch,
 } from '@material-ui/core';
 import { Settings as SettingsIcon, ExpandMore as ExpandMoreIcon } from '@material-ui/icons';
-
+import { connect } from 'react-redux';
+import { toggleNodeLabel } from '../../redux/actions';
 import { EXPAND_STATUS } from '../../utils/ExpandStatus';
 
 class GraphSetting extends Component {
-    constructor(props) {
-        super(props);
-    }
+    // constructor(props) {
+    //     super(props);
+    // }
 
     render() {
-        const { settingsStatus, togglePanel } = this.props;
+        const { settingsStatus, togglePanel, nodeLabelStatus, toggleNodeLabel } = this.props;
+        // console.log("xxx003 nodeLabelStatus ", nodeLabelStatus)
         return (
             <Accordion expanded={settingsStatus} onChange={togglePanel(EXPAND_STATUS.SETTINGS)}>
                 <AccordionSummary
@@ -39,9 +41,9 @@ class GraphSetting extends Component {
                         <ListItem>
                             <ListItemText primary="Node labels" />
                             <Switch
-                                checked={true}
-                                onChange={this.handleChange}
-                                name="checkedB"
+                                checked={nodeLabelStatus}
+                                onChange={toggleNodeLabel}
+                                // name="checkedB"
                                 color="primary"
                             />
                         </ListItem>
@@ -50,7 +52,7 @@ class GraphSetting extends Component {
                             <Switch
                                 checked={true}
                                 onChange={this.handleChange}
-                                name="checkedB"
+                                // name="checkedB"
                                 color="primary"
                             />
                         </ListItem>
@@ -59,7 +61,7 @@ class GraphSetting extends Component {
                             <Switch
                                 checked={true}
                                 onChange={this.handleChange}
-                                name="checkedB"
+                                // name="checkedB"
                                 color="primary"
                             />
                         </ListItem>
@@ -70,4 +72,17 @@ class GraphSetting extends Component {
     }
 }
 
-export default GraphSetting;
+const mapStateToProps = (state) => {
+    // console.log("xxx101 state: ", state)
+    return {
+        nodeLabelStatus: state.graphSettings.nodeLabelStatus,
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        toggleNodeLabel: (_) => dispatch(toggleNodeLabel()),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(GraphSetting);
