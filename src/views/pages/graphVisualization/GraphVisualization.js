@@ -30,7 +30,7 @@ export default function GraphVisualization(props) {
 
     return (
         <div className="gvis">
-            <React.Fragment>
+            <>
                 <IconButton
                     color="primary"
                     aria-label="Graph Configuration"
@@ -42,7 +42,7 @@ export default function GraphVisualization(props) {
                 <Drawer anchor="left" open={state} onClose={toggleDrawer(false)}>
                     <GraphConfig />
                 </Drawer>
-            </React.Fragment>
+            </>
             <Grid
                 spacing={1}
                 container

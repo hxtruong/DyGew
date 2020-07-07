@@ -20,7 +20,7 @@ class GraphSetting extends Component {
     // }
 
     render() {
-        //TODO: control state of nodeHighlight, globalStatsView
+        // TODO: control state of nodeHighlight, globalStatsView
         const { settingsStatus, togglePanel, nodeLabelStatus, toggleNodeLabel } = this.props;
         // console.log("xxx003 nodeLabelStatus ", nodeLabelStatus)
         return (
@@ -51,7 +51,7 @@ class GraphSetting extends Component {
                         <ListItem>
                             <ListItemText primary="Highlight neighbors" />
                             <Switch
-                                checked={true}
+                                checked
                                 onChange={this.handleChange}
                                 // name="checkedB"
                                 color="primary"
@@ -60,7 +60,7 @@ class GraphSetting extends Component {
                         <ListItem>
                             <ListItemText primary="Global stats view" />
                             <Switch
-                                checked={true}
+                                checked
                                 onChange={this.handleChange}
                                 // name="checkedB"
                                 color="primary"

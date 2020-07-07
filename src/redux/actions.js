@@ -1,11 +1,11 @@
 import { ADD_TODO, TOGGLE_TODO, SET_FILTER, TOGGLE_NODE_LABEL } from './actionTypes';
 
-let nextTodoId = 0;
+const nextTodoId = 0;
 
 export const addTodo = (content) => ({
     type: ADD_TODO,
     payload: {
-        id: ++nextTodoId,
+        id: nextTodoId + 1,
         content,
     },
 });
