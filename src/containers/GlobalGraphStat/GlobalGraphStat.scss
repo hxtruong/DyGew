@@ -1,0 +1,14 @@
+.globalGraphStat {
+    padding: 15px;
+    &__item {
+        border-bottom: 1px solid black;
+
+        :nth-child(2) {
+            margin-left: auto;
+        }
+        p {
+            margin: 4px;
+            text-transform: capitalize;
+        }
+    }
+}
